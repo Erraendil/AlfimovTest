@@ -25,7 +25,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" tag="101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Item Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wRN-o0-fRI">
                                             <rect key="frame" x="248" y="0.0" width="71" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="103" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Item Quantity" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vC7-0T-fY2">
@@ -53,7 +53,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="show" identifier="DetilView" id="BSB-9k-Qe5"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" identifier="DetailView" id="BSB-9k-Qe5"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -74,10 +74,10 @@
             </objects>
             <point key="canvasLocation" x="591" y="398"/>
         </scene>
-        <!--View Controller-->
+        <!--AddNewItem-->
         <scene sceneID="fjv-8H-dWc">
             <objects>
-                <viewController id="fw9-Bn-Vr2" sceneMemberID="viewController">
+                <viewController title="AddNewItem" id="fw9-Bn-Vr2" customClass="AddNewItemViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0Th-C9-5UN"/>
                         <viewControllerLayoutGuide type="bottom" id="fNk-ie-xJD"/>
@@ -89,7 +89,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Название:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C6r-x6-Qhc">
                                 <rect key="frame" x="16" y="72" width="82" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Nl6-T3-DxJ">
@@ -100,17 +100,17 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Цена:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3NN-YZ-l5z">
                                 <rect key="frame" x="16" y="139" width="46" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Колличество:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ADh-L0-I2R">
                                 <rect key="frame" x="16" y="206" width="110" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Icd-yD-7Er">
-                                <rect key="frame" x="16" y="168" width="97" height="30"/>
+                                <rect key="frame" x="16" y="167" width="97" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -122,7 +122,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="URL изображения:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nNK-cM-9RR">
                                 <rect key="frame" x="16" y="273" width="152" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mex-x0-ysD">
@@ -134,11 +134,28 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="Zwi-tF-prk">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="l5w-Nz-ujn"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="leC-XH-0f4"/>
+                        <barButtonItem key="leftBarButtonItem" title="Отменить" id="l5w-Nz-ujn">
+                            <connections>
+                                <segue destination="3ZD-I7-n9f" kind="unwind" unwindAction="unwindToList:" id="QGZ-J9-kvp"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Сохранить" id="leC-XH-0f4">
+                            <connections>
+                                <segue destination="3ZD-I7-n9f" kind="unwind" unwindAction="unwindToList:" id="Uiz-3l-C8z"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="URLTextField" destination="mex-x0-ysD" id="99Y-Ta-buf"/>
+                        <outlet property="cancelButton" destination="l5w-Nz-ujn" id="RUW-ID-Oxr"/>
+                        <outlet property="priceTextField" destination="Icd-yD-7Er" id="pJ0-Nf-RRG"/>
+                        <outlet property="quantityTextField" destination="z2m-Fm-CG7" id="g3N-s6-0Le"/>
+                        <outlet property="saveButton" destination="leC-XH-0f4" id="jpL-XA-VQM"/>
+                        <outlet property="titleTextField" destination="Nl6-T3-DxJ" id="B4t-xg-vHi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xb4-64-TgV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="3ZD-I7-n9f" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1272" y="-255"/>
         </scene>

@@ -17,6 +17,7 @@
 		B3A3450F1ABD89A500FE9913 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = B3A3450E1ABD89A500FE9913 /* Item.m */; };
 		B3A345121ABDCA2D00FE9913 /* ListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3A345111ABDCA2D00FE9913 /* ListTableViewController.m */; };
 		B3A345191ABDD23A00FE9913 /* data.csv in Resources */ = {isa = PBXBuildFile; fileRef = B3A345181ABDD23A00FE9913 /* data.csv */; };
+		B3BCBA1B1AC12C25005D2C5D /* AddNewItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3BCBA1A1AC12C25005D2C5D /* AddNewItemViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,8 @@
 		B3A345101ABDCA2D00FE9913 /* ListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListTableViewController.h; sourceTree = "<group>"; };
 		B3A345111ABDCA2D00FE9913 /* ListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListTableViewController.m; sourceTree = "<group>"; };
 		B3A345181ABDD23A00FE9913 /* data.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = data.csv; sourceTree = "<group>"; };
+		B3BCBA191AC12C25005D2C5D /* AddNewItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddNewItemViewController.h; sourceTree = "<group>"; };
+		B3BCBA1A1AC12C25005D2C5D /* AddNewItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddNewItemViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +155,8 @@
 				B3A344EF1ABD86A700FE9913 /* DetailViewController.m */,
 				B3A345101ABDCA2D00FE9913 /* ListTableViewController.h */,
 				B3A345111ABDCA2D00FE9913 /* ListTableViewController.m */,
+				B3BCBA191AC12C25005D2C5D /* AddNewItemViewController.h */,
+				B3BCBA1A1AC12C25005D2C5D /* AddNewItemViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -257,6 +262,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3BCBA1B1AC12C25005D2C5D /* AddNewItemViewController.m in Sources */,
 				B3A3450F1ABD89A500FE9913 /* Item.m in Sources */,
 				B3A344F01ABD86A700FE9913 /* DetailViewController.m in Sources */,
 				B3A344ED1ABD86A700FE9913 /* AppDelegate.m in Sources */,

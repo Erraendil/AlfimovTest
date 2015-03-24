@@ -9,6 +9,7 @@
 #import "ListTableViewController.h"
 #import "Item.h"
 #import "DetailViewController.h"
+#import "AddNewItemViewController.h"
 
 
 @interface ListTableViewController ()
@@ -132,11 +133,21 @@
 
 #pragma mark - Navigation
 
+- (IBAction)unwindToList:(UIStoryboardSegue *)segue{
+    AddNewItemViewController *source = [segue sourceViewController];
+    Item *newItem = source.item;
+    if (newItem != nil) {
+        [self.itemsArray addObject:newItem];
+        [self.tableView reloadData];
+    }
+    
+}
+
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    if ([segue.identifier isEqualToString:@"DetilView"]) {
+    if ([segue.identifier isEqualToString:@"DetailView"]) {
         DetailViewController *detailedView = [segue destinationViewController];
         Item *itemToTransmit = [self.itemsArray objectAtIndex:[[self.tableView indexPathForSelectedRow] row]];
         detailedView.displayItem = itemToTransmit;
