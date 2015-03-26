@@ -58,8 +58,8 @@
                             </tableViewCell>
                         </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="bnQ-t8-ALe" id="MCf-Cf-AB7"/>
-                            <outlet property="delegate" destination="bnQ-t8-ALe" id="xdJ-fA-kja"/>
+                            <outlet property="dataSource" destination="bnQ-t8-ALe" id="rNA-rI-bBD"/>
+                            <outlet property="delegate" destination="bnQ-t8-ALe" id="fzN-mD-zcg"/>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="GYF-lk-4vh">

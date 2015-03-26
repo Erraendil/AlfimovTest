@@ -10,60 +10,28 @@
 #import "Item.h"
 #import "DetailViewController.h"
 #import "AddNewItemViewController.h"
+#import "DataManager.h"
 
 
 @interface ListTableViewController ()
 
-@property NSMutableArray *itemsArray;
-
-- (void) loadDataFromCSV: (NSURL *) sourceURL;
+@property NSMutableArray    *items;
+@property DataManager       *manager;
 
 @end
 
 @implementation ListTableViewController
 
-@synthesize itemsArray;
+@synthesize items, manager;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
-
-- (void) viewWillAppear:(BOOL)animated {
-    //Setting URL to source file
-    NSURL *fileURL = [[NSURL alloc] initFileURLWithPath:[[NSBundle mainBundle] pathForResource:@"data" ofType:@"csv"]];
-    //Loading data from source file
-    [self loadDataFromCSV:fileURL];
+    self.manager = [[DataManager alloc] init];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-#pragma mark - Load data from csv
-
-- (void) loadDataFromCSV: (NSURL *) sourceURL {
-    // Var initalization
-    NSError     *error=nil;
-    NSString    *fileContent = [NSString stringWithContentsOfURL:sourceURL encoding:NSUTF8StringEncoding error:&error];
-    NSArray     *rows = [fileContent componentsSeparatedByString:@"\n"];
-    self.itemsArray = [[NSMutableArray alloc] init];
-    //Content array filling
-    for (int i=0; i<[rows count]; i++) {
-        Item        *currentItem= [[Item alloc] init];
-        NSString    *row = [rows objectAtIndex:i];
-        NSArray     *colums = [row componentsSeparatedByString:@","];
-        currentItem.title = [[colums objectAtIndex:0] stringByReplacingOccurrencesOfString:@"\"" withString:@""];
-        currentItem.price = [NSNumber numberWithFloat:[[[colums objectAtIndex:1] stringByReplacingOccurrencesOfString:@"\"" withString:@""] floatValue]];
-        currentItem.quantity = [NSNumber numberWithInt:[[[colums objectAtIndex:2] stringByReplacingOccurrencesOfString:@"\"" withString:@""] intValue]];
-        [self.itemsArray addObject:currentItem];
-    }
 }
 
 #pragma mark - Table view data source
@@ -73,14 +41,14 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.itemsArray count];
+    return [self.items count];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ItemCell" forIndexPath:indexPath];
-
-    Item *item = [self.itemsArray objectAtIndex:indexPath.row];
+    Item *item = [self.items objectAtIndex:indexPath.row];
     
     UILabel *cellItemTitle = (UILabel *)[cell viewWithTag:101];
     cellItemTitle.text = item.title;
@@ -90,7 +58,6 @@
     
     UILabel *cellItemQuantity = (UILabel *)[cell viewWithTag:103];
     cellItemQuantity.text = [item.quantity stringValue];
-    
     
     return cell;
 }
@@ -137,7 +104,8 @@
     AddNewItemViewController *source = [segue sourceViewController];
     Item *newItem = source.item;
     if (newItem != nil) {
-        [self.itemsArray addObject:newItem];
+        [self.items addObject:newItem];
+        [self.manager addItem:newItem];
         [self.tableView reloadData];
     }
     
@@ -149,7 +117,7 @@
     // Pass the selected object to the new view controller.
     if ([segue.identifier isEqualToString:@"DetailView"]) {
         DetailViewController *detailedView = [segue destinationViewController];
-        Item *itemToTransmit = [self.itemsArray objectAtIndex:[[self.tableView indexPathForSelectedRow] row]];
+        Item *itemToTransmit = [self.items objectAtIndex:[[self.tableView indexPathForSelectedRow] row]];
         detailedView.displayItem = itemToTransmit;
     }
 

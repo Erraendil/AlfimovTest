@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B329A7011AC0177E00E26480 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B329A6FF1AC0177E00E26480 /* Main.storyboard */; };
+		B37BCA1F1AC4591F0034F52D /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B37BCA1E1AC4591F0034F52D /* DataManager.m */; };
 		B3A344EA1ABD86A700FE9913 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B3A344E91ABD86A700FE9913 /* main.m */; };
 		B3A344ED1ABD86A700FE9913 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B3A344EC1ABD86A700FE9913 /* AppDelegate.m */; };
 		B3A344F01ABD86A700FE9913 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3A344EF1ABD86A700FE9913 /* DetailViewController.m */; };
@@ -32,6 +33,8 @@
 
 /* Begin PBXFileReference section */
 		B329A7001AC0177E00E26480 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B37BCA1D1AC4591F0034F52D /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
+		B37BCA1E1AC4591F0034F52D /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
 		B3A344E41ABD86A700FE9913 /* AlfimovTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlfimovTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3A344E81ABD86A700FE9913 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3A344E91ABD86A700FE9913 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -129,6 +132,8 @@
 		B3A345151ABDD15A00FE9913 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B37BCA1D1AC4591F0034F52D /* DataManager.h */,
+				B37BCA1E1AC4591F0034F52D /* DataManager.m */,
 				B3A345181ABDD23A00FE9913 /* data.csv */,
 			);
 			name = Model;
@@ -264,6 +269,7 @@
 			files = (
 				B3BCBA1B1AC12C25005D2C5D /* AddNewItemViewController.m in Sources */,
 				B3A3450F1ABD89A500FE9913 /* Item.m in Sources */,
+				B37BCA1F1AC4591F0034F52D /* DataManager.m in Sources */,
 				B3A344F01ABD86A700FE9913 /* DetailViewController.m in Sources */,
 				B3A344ED1ABD86A700FE9913 /* AppDelegate.m in Sources */,
 				B3A344EA1ABD86A700FE9913 /* main.m in Sources */,

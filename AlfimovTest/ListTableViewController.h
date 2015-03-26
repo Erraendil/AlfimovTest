@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ListTableViewController : UITableViewController
+@interface ListTableViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource>
 
 - (IBAction)unwindToList:(UIStoryboardSegue *)segue;
 
