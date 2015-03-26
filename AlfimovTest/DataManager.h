@@ -14,6 +14,5 @@
 - (NSMutableArray *) loadData;
 - (void) addItem: (Item *) item;
 - (void) editItem: (Item *) item;
-- (void) deleteItem: (Item *) item;
-
+- (void) deleteItem: (Item *) item atIndex: (NSInteger *)index;
 @end

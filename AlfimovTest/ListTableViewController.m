@@ -27,6 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.manager = [[DataManager alloc] init];
+    self.items = [manager loadData];
 }
 
 - (void)didReceiveMemoryWarning {
