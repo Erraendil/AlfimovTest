@@ -8,6 +8,7 @@
 
 #import "DetailViewController.h"
 #import "Item.h"
+#import "AppDelegate.h"
 
 @interface DetailViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *itemTitle;
@@ -16,15 +17,15 @@
 @property (weak, nonatomic) IBOutlet UIImageView *itemImage;
 @property (weak, nonatomic) IBOutlet UIButton *buyButton;
 @property NSNumber *quantityToBuy;
+@property AppDelegate *appDelegate;
 
 - (IBAction)PlusBuutonAction:(id)sender;
 - (IBAction)MinusBuutonAction:(id)sender;
-- (IBAction)BuyButtonAction:(id)sender;
 
 @end
 
 @implementation DetailViewController
-@synthesize displayItem, quantityToBuy;
+@synthesize displayItem, quantityToBuy, appDelegate, itemIndex;
 
 - (id)init {
     return self;
@@ -32,27 +33,24 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    appDelegate = [[UIApplication sharedApplication] delegate];
     
+    self.quantityToBuy=     @1;
     
-    // Do any additional setup after loading the view, typically from a nib.
+    [self.itemTitle setText:displayItem.title];
+    [self.itemPrice setText:[NSString stringWithFormat:@"%@ грн.",[displayItem.price stringValue]]];
+    [self.itemQuantity setText:[NSString stringWithFormat:@"%@/%@", [self.quantityToBuy stringValue],[displayItem.quantity stringValue]]];
+    
+    if ([self.displayItem.quantity integerValue]<1){
+        [self.buyButton setEnabled:NO];}
+    else{
+        [self.buyButton setEnabled:YES];}
 }
 
 
 - (void) viewWillAppear:(BOOL)animated{
 
-    self.quantityToBuy=     [[NSNumber alloc] init];
-    self.quantityToBuy=     @1;
-
-    /*
-    self.displayItem=       [[Item alloc] init];
-    displayItem.title=      @"Apple iPod touch 32Gb";
-    displayItem.price=      @5000.20;
-    displayItem.quantity=   @20;
-     */
     
-    [self.itemTitle setText:displayItem.title];
-    [self.itemPrice setText:[NSString stringWithFormat:@"%@ грн.",[displayItem.price stringValue]]];
-    [self.itemQuantity setText:[NSString stringWithFormat:@"%@/%@", [self.quantityToBuy stringValue],[displayItem.quantity stringValue]]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -78,27 +76,23 @@
     }
 }
 
-- (IBAction)BuyButtonAction:(id)sender {
-    //Set URL
-    NSURL *kBuyRequestUrl = [[NSURL alloc] initWithString:@""];
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    self.displayItem.quantity = [ NSNumber numberWithInt:([self.displayItem.quantity intValue]-[self.quantityToBuy intValue])];
     
-    // Create the request.
+    NSURL *kBuyRequestUrl = [[NSURL alloc] initWithString:@"BuyRequest.com/buy.php"];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:kBuyRequestUrl];
-    
-    // Specify that it will be a POST request
     request.HTTPMethod = @"POST";
     
-    // This is how we set header fields
-    [request setValue:@"application/xml; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+    NSString *parameters= [NSString stringWithFormat:@"?id=%li&amount=%i&name=%@",
+                               (long)self.itemIndex,
+                               [self.quantityToBuy intValue],
+                               self.appDelegate.userName];
     
-    // Convert your data and set your request's HTTPBody property
-    NSString *stringData = @"some data";
-    NSData *requestBodyData = [stringData dataUsingEncoding:NSUTF8StringEncoding];
-    request.HTTPBody = requestBodyData;
-    
+    request.HTTPBody = [parameters dataUsingEncoding:NSUTF8StringEncoding];
+        
     // Create url connection and fire request
-    NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-}
+    [[NSURLConnection alloc] initWithRequest:request delegate:self];
+ }
 
 #pragma mark NSURLConnection Delegate Methods
 
@@ -130,6 +124,19 @@
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     // The request has failed for some reason!
     // Check the error var
+    /*
+    UIAlertController *errorAlert = [UIAlertController alertControllerWithTitle:@"Ошибка!"
+                                                                   message:[NSString stringWithFormat:@"%@", error]
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"Ok"
+                                                 style:UIAlertActionStyleDefault
+                                               handler:^(UIAlertAction *action) {
+                                                   [errorAlert dismissViewControllerAnimated:YES completion:nil];
+                                               }];
+    [errorAlert addAction:ok];
+    [self presentViewController:errorAlert animated:YES completion:nil];
+     */
+    
 }
 
 @end

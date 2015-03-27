@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "Item.h"
 
-@interface AddNewItemViewController : UIViewController
+@interface ItemViewController : UIViewController
 
 @property Item *item;
+@property BOOL isItemEdited;
 
 @end

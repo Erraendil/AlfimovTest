@@ -15,6 +15,7 @@
 }
 
 @property Item *displayItem;
+@property NSInteger itemIndex;
 
 
 @end

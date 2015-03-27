@@ -18,8 +18,8 @@
 - (NSMutableArray *) stringToArrayOfItems: (NSString *)string;
 - (NSString *) arrayOfItemsToString: (NSMutableArray *) array;
 - (NSMutableArray *) addToItemsArray: (NSMutableArray *)array item: (Item *)item;
-- (NSMutableArray *) updateItemsArray: (NSMutableArray *)array byItem: (Item *)item;
-- (NSMutableArray *) deleteFromItemsArray: (NSMutableArray *)array item: (Item *)item;
+- (NSMutableArray *) updateItemsArray: (NSMutableArray *)array byItem: (Item *)item withIndex: (NSInteger)index;
+- (NSMutableArray *) deleteFromItemsArray: (NSMutableArray *)array item: (Item *)item withIndex: (NSInteger)index;
 @end
 
 @implementation DataManager
@@ -38,14 +38,24 @@
     [readHandler closeFile];
     return [self stringToArrayOfItems:fileContent];
 }
+
+- (NSMutableArray *) reloadData{
+    [self removeCSVFromDocuments];
+    [self copyCSVToDocumentsIfNeeded];
+    NSFileHandle *readHandler = [NSFileHandle fileHandleForReadingAtPath:[self getCSVPath]];
+    NSString    *fileContent = [[NSString alloc] initWithData:[readHandler readDataToEndOfFile] encoding:NSUTF8StringEncoding];
+    [readHandler closeFile];
+    return [self stringToArrayOfItems:fileContent];
+}
+
 - (void) addItem: (Item *) item{
     [self saveDataFromString:[self arrayOfItemsToString:[self addToItemsArray:[self loadData] item:item]]];
 }
-- (void) updateItem: (Item *) item{
-    [self saveDataFromString:[self arrayOfItemsToString:[self updateItemsArray:[self loadData] byItem:item]]];
+- (void) updateItem: (Item *) item withIndex: (NSInteger)index{
+    [self saveDataFromString:[self arrayOfItemsToString:[self updateItemsArray:[self loadData] byItem:item withIndex:index]]];
 }
-- (void) deleteItem: (Item *) item{
-     [self saveDataFromString:[self arrayOfItemsToString:[self deleteFromItemsArray:[self loadData] item:item]]];
+- (void) deleteItem: (Item *) item withIndex: (NSInteger)index{
+     [self saveDataFromString:[self arrayOfItemsToString:[self deleteFromItemsArray:[self loadData] item:item withIndex:index]]];
 }
 
 #pragma mark - Documtns methods
@@ -194,17 +204,13 @@
     return array;
 }
 
-- (NSMutableArray *) updateItemsArray: (NSMutableArray *)array byItem: (Item *)item{
-    for (int i=0; i<[array count]; i++)
-        if ([[[array objectAtIndex:i] title] isEqualToString:[item title]])
-            [array replaceObjectAtIndex:i withObject:item];
+- (NSMutableArray *) updateItemsArray: (NSMutableArray *)array byItem: (Item *)item withIndex: (NSInteger)index{
+    [array replaceObjectAtIndex:index withObject:item];
     return array;
 }
 
-- (NSMutableArray *) deleteFromItemsArray: (NSMutableArray *)array item: (Item *)item{
-    for (int i=0; i<[array count]; i++)
-        if ([[[array objectAtIndex:i] title] isEqualToString:[item title]])
-            [array removeObject:item];
+- (NSMutableArray *) deleteFromItemsArray: (NSMutableArray *)array item: (Item *)item withIndex: (NSInteger)index{
+    [array removeObjectAtIndex:index];
     return array;
 }
 @end

@@ -11,7 +11,8 @@
 
 @interface DataManager : NSObject
 - (NSMutableArray *) loadData;
+- (NSMutableArray *) reloadData;
 - (void) addItem: (Item *) item;
-- (void) updateItem: (Item *) item;
-- (void) deleteItem: (Item *) item;
+- (void) updateItem: (Item *) item withIndex: (NSInteger)index;
+- (void) deleteItem: (Item *) item withIndex: (NSInteger)index;
 @end

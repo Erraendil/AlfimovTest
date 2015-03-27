@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		B329A7011AC0177E00E26480 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B329A6FF1AC0177E00E26480 /* Main.storyboard */; };
 		B37BCA1F1AC4591F0034F52D /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B37BCA1E1AC4591F0034F52D /* DataManager.m */; };
+		B37CD76E1AC5953900685FDA /* EnteranceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B37CD76D1AC5953900685FDA /* EnteranceViewController.m */; };
 		B3A344EA1ABD86A700FE9913 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B3A344E91ABD86A700FE9913 /* main.m */; };
 		B3A344ED1ABD86A700FE9913 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B3A344EC1ABD86A700FE9913 /* AppDelegate.m */; };
 		B3A344F01ABD86A700FE9913 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3A344EF1ABD86A700FE9913 /* DetailViewController.m */; };
@@ -18,7 +19,7 @@
 		B3A3450F1ABD89A500FE9913 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = B3A3450E1ABD89A500FE9913 /* Item.m */; };
 		B3A345121ABDCA2D00FE9913 /* ListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3A345111ABDCA2D00FE9913 /* ListTableViewController.m */; };
 		B3A345191ABDD23A00FE9913 /* data.csv in Resources */ = {isa = PBXBuildFile; fileRef = B3A345181ABDD23A00FE9913 /* data.csv */; };
-		B3BCBA1B1AC12C25005D2C5D /* AddNewItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3BCBA1A1AC12C25005D2C5D /* AddNewItemViewController.m */; };
+		B3BCBA1B1AC12C25005D2C5D /* ItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3BCBA1A1AC12C25005D2C5D /* ItemViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +36,8 @@
 		B329A7001AC0177E00E26480 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B37BCA1D1AC4591F0034F52D /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
 		B37BCA1E1AC4591F0034F52D /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
+		B37CD76C1AC5953900685FDA /* EnteranceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnteranceViewController.h; sourceTree = "<group>"; };
+		B37CD76D1AC5953900685FDA /* EnteranceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnteranceViewController.m; sourceTree = "<group>"; };
 		B3A344E41ABD86A700FE9913 /* AlfimovTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlfimovTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3A344E81ABD86A700FE9913 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3A344E91ABD86A700FE9913 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -52,8 +55,8 @@
 		B3A345101ABDCA2D00FE9913 /* ListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListTableViewController.h; sourceTree = "<group>"; };
 		B3A345111ABDCA2D00FE9913 /* ListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListTableViewController.m; sourceTree = "<group>"; };
 		B3A345181ABDD23A00FE9913 /* data.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = data.csv; sourceTree = "<group>"; };
-		B3BCBA191AC12C25005D2C5D /* AddNewItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddNewItemViewController.h; sourceTree = "<group>"; };
-		B3BCBA1A1AC12C25005D2C5D /* AddNewItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddNewItemViewController.m; sourceTree = "<group>"; };
+		B3BCBA191AC12C25005D2C5D /* ItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemViewController.h; sourceTree = "<group>"; };
+		B3BCBA1A1AC12C25005D2C5D /* ItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,12 +159,14 @@
 				B3A344EC1ABD86A700FE9913 /* AppDelegate.m */,
 				B3A3450D1ABD89A500FE9913 /* Item.h */,
 				B3A3450E1ABD89A500FE9913 /* Item.m */,
-				B3A344EE1ABD86A700FE9913 /* DetailViewController.h */,
-				B3A344EF1ABD86A700FE9913 /* DetailViewController.m */,
+				B37CD76C1AC5953900685FDA /* EnteranceViewController.h */,
+				B37CD76D1AC5953900685FDA /* EnteranceViewController.m */,
 				B3A345101ABDCA2D00FE9913 /* ListTableViewController.h */,
 				B3A345111ABDCA2D00FE9913 /* ListTableViewController.m */,
-				B3BCBA191AC12C25005D2C5D /* AddNewItemViewController.h */,
-				B3BCBA1A1AC12C25005D2C5D /* AddNewItemViewController.m */,
+				B3A344EE1ABD86A700FE9913 /* DetailViewController.h */,
+				B3A344EF1ABD86A700FE9913 /* DetailViewController.m */,
+				B3BCBA191AC12C25005D2C5D /* ItemViewController.h */,
+				B3BCBA1A1AC12C25005D2C5D /* ItemViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -267,7 +272,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B3BCBA1B1AC12C25005D2C5D /* AddNewItemViewController.m in Sources */,
+				B37CD76E1AC5953900685FDA /* EnteranceViewController.m in Sources */,
+				B3BCBA1B1AC12C25005D2C5D /* ItemViewController.m in Sources */,
 				B3A3450F1ABD89A500FE9913 /* Item.m in Sources */,
 				B37BCA1F1AC4591F0034F52D /* DataManager.m in Sources */,
 				B3A344F01ABD86A700FE9913 /* DetailViewController.m in Sources */,

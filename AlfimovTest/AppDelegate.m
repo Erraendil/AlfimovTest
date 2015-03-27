@@ -13,6 +13,7 @@
 @end
 
 @implementation AppDelegate
+@synthesize userName;
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {

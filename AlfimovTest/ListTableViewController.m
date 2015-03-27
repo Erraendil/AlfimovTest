@@ -9,7 +9,7 @@
 #import "ListTableViewController.h"
 #import "Item.h"
 #import "DetailViewController.h"
-#import "AddNewItemViewController.h"
+#import "ItemViewController.h"
 #import "DataManager.h"
 
 
@@ -17,17 +17,34 @@
 
 @property NSMutableArray    *items;
 @property DataManager       *manager;
+@property NSInteger         indexForItem;
+@property UIRefreshControl  *refreshControl;
+- (void)refreshTable;
 
 @end
 
 @implementation ListTableViewController
 
-@synthesize items, manager;
+@synthesize items, manager,indexForItem,refreshControl;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.manager = [[DataManager alloc] init];
     self.items = [manager loadData];
+    self.refreshControl = [[UIRefreshControl alloc]init];
+    [self.tableView addSubview:refreshControl];
+    [refreshControl addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
+}
+
+- (void) viewWillAppear:(BOOL)animated{
+    self.items = [manager loadData];
+    [self.tableView reloadData];
+}
+
+- (void)refreshTable {
+    self.items = [self.manager reloadData];
+    [refreshControl endRefreshing];
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -101,15 +118,35 @@
 
 #pragma mark - Navigation
 
-- (IBAction)unwindToList:(UIStoryboardSegue *)segue{
-    AddNewItemViewController *source = [segue sourceViewController];
+- (IBAction)unwindToListFromItem:(UIStoryboardSegue *)segue{
+    ItemViewController *source = [segue sourceViewController];
     Item *newItem = source.item;
     if (newItem != nil) {
-        [self.items addObject:newItem];
-        [self.manager addItem:newItem];
+        if (!source.isItemEdited){
+            [self.manager addItem:newItem];
+            self.items = [self.manager loadData];
+            [self.tableView reloadData];
+        }
+        else{
+            [self.manager updateItem:newItem withIndex:self.indexForItem];
+            self.items = [self.manager loadData];
+            [self.tableView reloadData];
+        }
+    }
+    else if (source.isItemEdited){
+        [self.manager deleteItem:newItem withIndex:self.indexForItem];
+        self.items = [self.manager loadData];
         [self.tableView reloadData];
     }
-    
+}
+
+- (IBAction)unwindToListFromDetail:(UIStoryboardSegue *)segue{
+    DetailViewController *source = [segue sourceViewController];
+    if (source.displayItem != nil) {
+        [self.manager updateItem:source.displayItem withIndex:self.indexForItem];
+        self.items = [self.manager loadData];
+        [self.tableView reloadData];
+    }
 }
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -120,8 +157,14 @@
         DetailViewController *detailedView = [segue destinationViewController];
         Item *itemToTransmit = [self.items objectAtIndex:[[self.tableView indexPathForSelectedRow] row]];
         detailedView.displayItem = itemToTransmit;
+        detailedView.itemIndex = [[self.tableView indexPathForSelectedRow] row];
     }
-
+    else if ([segue.identifier isEqualToString:@"EditItem"]) {
+        ItemViewController *editView = [segue destinationViewController];
+        Item *itemToTransmit = [self.items objectAtIndex:[[self.tableView indexPathForSelectedRow] row]];
+        editView.item = itemToTransmit;
+    }
+    self.indexForItem = [[self.tableView indexPathForSelectedRow] row];
 }
 
 @end

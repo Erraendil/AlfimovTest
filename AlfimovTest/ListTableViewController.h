@@ -10,6 +10,7 @@
 
 @interface ListTableViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource>
 
-- (IBAction)unwindToList:(UIStoryboardSegue *)segue;
+- (IBAction)unwindToListFromItem:(UIStoryboardSegue *)segue;
+- (IBAction)unwindToListFromDetail:(UIStoryboardSegue *)segue;
 
 @end
