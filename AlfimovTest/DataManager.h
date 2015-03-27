@@ -10,9 +10,8 @@
 #import "Item.h"
 
 @interface DataManager : NSObject
-
 - (NSMutableArray *) loadData;
 - (void) addItem: (Item *) item;
-- (void) editItem: (Item *) item;
-- (void) deleteItem: (Item *) item atIndex: (NSInteger *)index;
+- (void) updateItem: (Item *) item;
+- (void) deleteItem: (Item *) item;
 @end

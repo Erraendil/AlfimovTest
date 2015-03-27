@@ -10,23 +10,47 @@
 #import "Item.h"
 
 @interface DataManager()
-- (void) copyCSVToDocuments;
+- (void) copyCSVToDocumentsIfNeeded;
 - (void) createCSVInDocuments;
 - (void) removeCSVFromDocuments;
 - (NSString *) getCSVPath;
+- (void) saveDataFromString: (NSString *)string;
+- (NSMutableArray *) stringToArrayOfItems: (NSString *)string;
+- (NSString *) arrayOfItemsToString: (NSMutableArray *) array;
+- (NSMutableArray *) addToItemsArray: (NSMutableArray *)array item: (Item *)item;
+- (NSMutableArray *) updateItemsArray: (NSMutableArray *)array byItem: (Item *)item;
+- (NSMutableArray *) deleteFromItemsArray: (NSMutableArray *)array item: (Item *)item;
 @end
 
 @implementation DataManager
 
 
 - (id) init{
-//    [self copyCSVToDocuments];
-//    [self removeCSVFromDocuments];
-    [self createCSVInDocuments];
+    [self copyCSVToDocumentsIfNeeded];
     return self;
 }
 
-- (void) copyCSVToDocuments {
+#pragma mark - Public methods
+
+- (NSMutableArray *) loadData{
+    NSFileHandle *readHandler = [NSFileHandle fileHandleForReadingAtPath:[self getCSVPath]];
+    NSString    *fileContent = [[NSString alloc] initWithData:[readHandler readDataToEndOfFile] encoding:NSUTF8StringEncoding];
+    [readHandler closeFile];
+    return [self stringToArrayOfItems:fileContent];
+}
+- (void) addItem: (Item *) item{
+    [self saveDataFromString:[self arrayOfItemsToString:[self addToItemsArray:[self loadData] item:item]]];
+}
+- (void) updateItem: (Item *) item{
+    [self saveDataFromString:[self arrayOfItemsToString:[self updateItemsArray:[self loadData] byItem:item]]];
+}
+- (void) deleteItem: (Item *) item{
+     [self saveDataFromString:[self arrayOfItemsToString:[self deleteFromItemsArray:[self loadData] item:item]]];
+}
+
+#pragma mark - Documtns methods
+
+- (void) copyCSVToDocumentsIfNeeded {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSError *error;
     
@@ -117,11 +141,21 @@
     return [documentsDir stringByAppendingPathComponent:@"data.csv"];
 }
 
-- (NSMutableArray *) loadData{
-    NSFileHandle *readHandler = [NSFileHandle fileHandleForReadingAtPath:[self getCSVPath]];
-    NSString    *fileContent = [[NSString alloc] initWithData:[readHandler readDataToEndOfFile] encoding:NSUTF8StringEncoding];
-    NSArray     *rows = [fileContent componentsSeparatedByString:@"\n"];
-    NSMutableArray *items = [[NSMutableArray alloc] init];
+
+- (void) saveDataFromString: (NSString *)string{
+    [self removeCSVFromDocuments];
+    [self createCSVInDocuments];
+    NSFileHandle *addHandler = [NSFileHandle fileHandleForUpdatingAtPath:[self getCSVPath]];
+    [addHandler seekToEndOfFile];
+    [addHandler writeData:[string dataUsingEncoding:NSUTF8StringEncoding]];
+    [addHandler closeFile];
+}
+
+#pragma mark - Convertation
+
+- (NSMutableArray *) stringToArrayOfItems: (NSString *)string{
+    NSArray     *rows = [string componentsSeparatedByString:@"\n"];
+    NSMutableArray *arrayOfItems = [[NSMutableArray alloc] init];
     
     for (int i=0; i<[rows count]; i++) {
         NSString    *row = [rows objectAtIndex:i];
@@ -130,34 +164,47 @@
         item.title = [[colums objectAtIndex:0] stringByReplacingOccurrencesOfString:@"\"" withString:@""];
         item.price = [NSNumber numberWithFloat:[[[colums objectAtIndex:1] stringByReplacingOccurrencesOfString:@"\"" withString:@""] floatValue]];
         item.quantity = [NSNumber numberWithInt:[[[colums objectAtIndex:2] stringByReplacingOccurrencesOfString:@"\"" withString:@""]intValue]];
-        [items addObject:item];
+        [arrayOfItems addObject:item];
     }
-    [readHandler closeFile];
-    return items;
+    return arrayOfItems;
 }
 
-- (void) addItem: (Item *) item{
-    NSFileHandle *addHandler = [NSFileHandle fileHandleForUpdatingAtPath:[self getCSVPath]];
-    NSString *dataString = [NSString stringWithFormat:@"\n%@, %@, %@",
-                            item.title,
-                            [item.price stringValue],
-                            [item.quantity stringValue]];
-    [addHandler seekToEndOfFile];
-    [addHandler writeData:[dataString dataUsingEncoding:NSUTF8StringEncoding]];
-    [addHandler closeFile];
+- (NSString *) arrayOfItemsToString: (NSMutableArray *) array{
+    NSString *string = @"";
     
+    for (int i=0; i<[array count]; i++) {
+        if (i==[array count]-1)
+            string = [string stringByAppendingString:[NSString stringWithFormat:@"%@, %@, %@",
+                                                      [[array objectAtIndex:i] title],
+                                                      [[[array objectAtIndex:i] price] stringValue],
+                                                      [[[array objectAtIndex:i] quantity] stringValue]]];
+        else
+            string = [string stringByAppendingString:[NSString stringWithFormat:@"%@, %@, %@\n",
+                                                      [[array objectAtIndex:i] title],
+                                                      [[[array objectAtIndex:i] price] stringValue],
+                                                      [[[array objectAtIndex:i] quantity] stringValue]]];
+    }
+    return string;
 }
 
-- (void) deleteItem: (Item *) item atIndex: (NSInteger *)index{
-    NSMutableArray *items = [self loadData];
-    NSFileHandle *deleteHandler = [NSFileHandle fileHandleForUpdatingAtPath:[self getCSVPath]];
-    NSString *dataString = [NSString stringWithFormat:@"\n%@, %@, %@",
-                            item.title,
-                            [item.price stringValue],
-                            [item.quantity stringValue]];
-    [deleteHandler seekToEndOfFile];
-    [deleteHandler writeData:[dataString dataUsingEncoding:NSUTF8StringEncoding]];
-    [deleteHandler closeFile];
+#pragma mark - Array and string manager
+
+- (NSMutableArray *) addToItemsArray: (NSMutableArray *)array item: (Item *)item{
+    [array addObject:item];
+    return array;
 }
 
+- (NSMutableArray *) updateItemsArray: (NSMutableArray *)array byItem: (Item *)item{
+    for (int i=0; i<[array count]; i++)
+        if ([[[array objectAtIndex:i] title] isEqualToString:[item title]])
+            [array replaceObjectAtIndex:i withObject:item];
+    return array;
+}
+
+- (NSMutableArray *) deleteFromItemsArray: (NSMutableArray *)array item: (Item *)item{
+    for (int i=0; i<[array count]; i++)
+        if ([[[array objectAtIndex:i] title] isEqualToString:[item title]])
+            [array removeObject:item];
+    return array;
+}
 @end
